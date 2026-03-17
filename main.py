@@ -19,13 +19,13 @@ def first_task():
 
     # 5. Используя списочное выражение и метод split, составьте список из введённых чисел, записанных на одной
     #    строке без указания заранее их количества; затем выведите их квадраты также на одной строке.
-    fifth_list = [int(x) ** 2 for x in input("Введите числа: ").split()]
+    fifth_list = [str(int(x) ** 2) for x in input("Введите числа: ").split()]
     print(" ".join(fifth_list))
 
     # 6. Используя списочное выражение и метод split, составьте список из введённых чисел, записанных на одной
     #    строке без указания заранее их количества; затем выведите на одной строке только те квадраты нечетных
     #    чисел, которые не заканчиваются на цифру 9. Постарайтесь решить данную задачу в одну строку.
-    print(" ".join([int(x) ** 2 for x in input("Введите числа: ").split() if int(x) % 2 != 0 and (int(x) ** 2) % 10 != 9]))
+    print(" ".join([str(int(x) ** 2) for x in input("Введите числа: ").split() if int(x) % 2 != 0 and (int(x) ** 2) % 10 != 9]))
 
 
 # Задание 2
@@ -89,6 +89,9 @@ def bracket_check(test_string):
         elif char == ")":
             counter -= 1
 
+        if counter < 0:
+            return "NO"
+
     if counter == 0:
         return "YES"
     else:
@@ -150,13 +153,13 @@ def add_friends(name_of_person, list_of_friends):
 
 
 def are_friends(name_of_person1, name_of_person2):
-    person1_friends = alice_friends.get(name_of_person1, None)
+    person1_friends = alice_friends.get(name_of_person1, set())
 
     return name_of_person2 in person1_friends
 
 
 def print_friends(name_of_person):
-    person_friends = alice_friends.get(name_of_person, None)
+    person_friends = alice_friends.get(name_of_person, set())
 
     person_friends = sorted(person_friends)
 
@@ -292,12 +295,12 @@ fractal[2] = fractal
 # Задание 16
 # В строке исходной функции sequence = sequence + [next_element] создается новая локальная переменная
 # sequence, которая исчезает после выполнения функции. Для модификации списка (изменяемого типа данных)
-# можно использовать оператор +=, который добавляет новый элемент в конец списка, модифицируя его, и не
+# можно использовать метод append(), который добавляет новый элемент в конец списка, модифицируя его, и не
 # создавая нового объекта.
 def continue_fibonacci_sequence(sequence, n):
     for i in range(n):
         next_element = sequence[-1] + sequence[-2]
-        sequence += next_element  # Добавление нового элемента в исходный список
+        sequence.append(next_element)  # Добавление нового элемента в исходный список
 
 
 # Задание 17
@@ -422,47 +425,121 @@ def solve(*coefficients):
 
 
 def main():
+    # Задание 1
+    first_task()
 
-    # print_without_duplicates("Привет")
-    # print_without_duplicates("Не могу до тебя дозвониться")
-    # print_without_duplicates("Не могу до тебя дозвониться")
-    # print_without_duplicates("Не могу до тебя дозвониться")
-    # print_without_duplicates("Когда доедешь до дома")
-    # print_without_duplicates("Ага, жду")
-    # print_without_duplicates("Ага, жду")
+    # Задание 2
+    second_task()
 
-    # add_friends("Алла", ["Марина", "Иван"])
-    # print(are_friends("Алла", "Мария"))
+    # Задание 3
+    triangle(1, 1, 2)
+    triangle(7, 6, 10)
 
-    # add_friends("Алла", ["Мария"])
-    # print(are_friends("Алла", "Мария"))
+    # Задание 4
+    print(distance(0, 0, 3, 4))
 
-    # first = [1, 2, 3]
-    # second = [4, 5, 6]
-    # first_content = first[:]
-    # second_content = second[:]
-    # swap(first, second)
-    # print(first, second_content, first == second_content)
-    # print(second, first_content, second == first_content)
+    # Задание 5
+    print(number_to_words(4))
+    print(number_to_words(13))
 
-    # fracta1 = [2, 5]
-    # fracta1.append(fracta1)
-    # fracta1.append(3)
-    # fracta1.append(fracta1)
-    # fracta1.append(9)
-    # defractalize(fracta1)
-    # print(fracta1)
+    # Задание 6
+    print(bracket_check("()"))
+    print(bracket_check("((()(()"))
 
-    # fracta2 = [3]
-    # fracta2.append(fracta2)
-    # fractal_print(fracta2)
+    # Задание 7
+    print(palindrome("А роза упала на лапу Азора"))
+    print(palindrome("Палиндром"))
 
-    # rows = matrix(2, 5, 4)
-    # for row in rows:
-    #    print(*row)
+    # Задание 8
+    field = [
+        ["0", "-", "0"],
+        ["x", "x", "x"],
+        ["0", "0", "-"]
+    ]
+    tic_tac_toe(field)
 
-    # print(partial_sums(1, 0.5, 0.25, 0.125))
+    # Задание 9
+    print_without_duplicates("Привет")
+    print_without_duplicates("Не могу до тебя дозвониться")
+    print_without_duplicates("Не могу до тебя дозвониться")
+    print_without_duplicates("Когда доедешь до дома")
+    print_without_duplicates("Ага, жду")
+    print_without_duplicates("Ага, жду")
 
+    # Задание 10
+    add_friends("Алла", ["Марина", "Иван"])
+    print(are_friends("Алла", "Мария"))
+    add_friends("Алла", ["Мария"])
+    print(are_friends("Алла", "Мария"))
+
+    # Задание 11
+    roman()
+
+    # Задание 12
+    twelfth_task()
+
+    # Задание 13
+    thirteen_task()
+
+    # Задание 14
+    fourteen_task()
+
+    # Задание 16
+    sequence = [1, 1]
+    continue_fibonacci_sequence(sequence, 1)
+    print(*sequence)
+
+    # Задание 17
+    arr = [1, 2]
+    mirror(arr)
+    print(*arr)
+
+    # Задание 18
+    a = [1, 2, 3]
+    from_string_to_list("1 3 99 52", a)
+    print(*a)
+
+    # Задание 19
+    matrix_19 = [[1]]
+    transpose(matrix_19)
+    for line in matrix_19:
+        print(*line)
+
+    # Задание 20
+    first = [1, 2, 3]
+    second = [4, 5, 6]
+    first_content = first[:]
+    second_content = second[:]
+    swap(first, second)
+    print(first, second_content, first == second_content)
+    print(second, first_content, second == first_content)
+
+    # Задание 21
+    fractal_21 = [2, 5]
+    fractal_21.append(fractal_21)
+    fractal_21.append(3)
+    defractalize(fractal_21)
+    print(fractal_21)
+
+    # Задание 22
+    fractal_22 = [3]
+    fractal_22.append(fractal_22)
+    fractal_print(fractal_22)
+
+    # Задание 23
+    rows = matrix()
+    for row in rows:
+        print(*row)
+
+    rows2 = matrix(2)
+    for row in rows2:
+        print(*row)
+
+    # Задание 24
+    print(partial_sums(1, 0.5, 0.25, 0.125))
+
+    # Задание 25
+    print(sorted(solve(1, 2, 1)))
     print(sorted(solve(1, -3, 2)))
 
 
